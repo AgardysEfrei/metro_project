@@ -4,3 +4,4 @@ class Stations:
         self.nbr_line=lines
         self.is_terminal=is_terminal
         self.fork=fork
+    #jkj
