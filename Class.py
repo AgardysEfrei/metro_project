@@ -24,3 +24,16 @@ class Stations:
             if self.lines[i]>19:
                 self.lines[i]=str(int(self.lines[i]/10))+"bis"
         return f"Stations:{self.identifier}\nLignes:{self.lines}\nVertex:{self.vertex}\nFork:{self.fork}\nTerminal:{self.is_terminal}"
+
+
+class Segment:
+    def __init__(self, stations, time):
+        self.stations = stations
+        self.time = time
+
+    def get_stations(self):
+        return self.stations
+
+    def get_time(self):
+        return self.time
+

@@ -34,6 +34,18 @@ def return_stations():
                     vertex_list.append(stop)
         return vertex_list
 
+def return_edges():
+    edges_list = []
+    with open("Source/Sources projet métro/metro","r") as edges:
+        for segment in edges:
+            if segment[0]=="E":
+                segment_stations = (segment[1], segment[2])
+                segment_time = segment[3]
+                edge = Segment(segment_stations, segment_time)
+                edges_list.append(edge)
+        return edges_list
+
+
 """def return_adjacency_matrix_fr():
     max = return_max()
     matrix=[[None for i in range(max+1)] for i in range(max+1)]
