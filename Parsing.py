@@ -23,7 +23,7 @@ def return_stations():
                     stop=Stations(station_name,station_line,station_id,station_is_terminal,station_fork)
                     vertex_list.append(stop)
         return vertex_list
-def return_adjacency_matrix_from_file():
+"""def return_adjacency_matrix_fr():
     max = return_max()
     matrix=[[None for i in range(max+1)] for i in range(max+1)]
     with open("Source/Sources projet métro/metro","r") as vertex:
@@ -53,7 +53,7 @@ def return_max():
                 if column>max:
                     max=column
         return max
-
+"""
 def there_is_name(name,stationList):
     if len(stationList)==0:
         return False,-1
