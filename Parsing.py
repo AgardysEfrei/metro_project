@@ -1,5 +1,17 @@
 from Class import *
 from various_functions import*
+
+
+def there_is_name(name,stationList):
+    if len(stationList)==0:
+        return False,-1
+    else :
+        for i in range(len(stationList)):
+            if stationList[i].get_name()==name:
+                return True,i
+        return False,-1
+
+
 def return_stations():
     vertex_list=[]
     identifier = 0
@@ -23,6 +35,19 @@ def return_stations():
                     stop=Stations(station_name,station_line,station_id,station_is_terminal,station_fork)
                     vertex_list.append(stop)
         return vertex_list
+
+    def return_edges():
+        edges_list = []
+        with open("Source/Sources projet métro/metro", "r") as edges:
+            for segment in edges:
+                if segment[0] == "E":
+                    segment_stations = (segment[1], segment[2])
+                    segment_time = segment[3]
+                    edge = Segment(segment_stations, segment_time)
+                    edges_list.append(edge)
+            return edges_list
+
+
 """def return_adjacency_matrix_fr():
     max = return_max()
     matrix=[[None for i in range(max+1)] for i in range(max+1)]
@@ -54,11 +79,3 @@ def return_max():
                     max=column
         return max
 """
-def there_is_name(name,stationList):
-    if len(stationList)==0:
-        return False,-1
-    else :
-        for i in range(len(stationList)):
-            if stationList[i].get_name()==name:
-                return True,i
-        return False,-1
