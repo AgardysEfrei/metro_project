@@ -36,7 +36,7 @@ def return_stations():
                     vertex_list.append(stop)
         return vertex_list
 
-    def return_edges():
+def return_edges():
         edges_list = []
         with open("Source/Sources projet métro/metro", "r") as edges:
             for segment in edges:
