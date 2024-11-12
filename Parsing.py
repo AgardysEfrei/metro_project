@@ -1,5 +1,5 @@
 from Class import *
-
+from various_functions import*
 def return_stations():
     vertex_list=[]
     identifier = 0
@@ -9,7 +9,7 @@ def return_stations():
                 station=station.split(";")
                 station[-1] = station[-1][:-1]
                 station_id=station[1]
-                station_name=station[2]
+                station_name=remove_accents(station[2])
                 if("bis" in station[3]):
                     station_line=int(station[3][0])*10
                 else:
