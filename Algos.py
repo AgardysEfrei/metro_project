@@ -10,3 +10,6 @@ def connexite():
 
 def Bellman_ford():
     pass
+
+def Prim():
+    pass

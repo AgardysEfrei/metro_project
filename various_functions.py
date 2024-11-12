@@ -1,6 +1,5 @@
 import unicodedata as uni
 from Parsing import*
-import re
 def remove_accents(text):
     text=text.encode('latin',errors='replace')
     text=text.decode('utf-8',errors='replace')
