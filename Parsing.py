@@ -1,5 +1,5 @@
 from Class import *
-from various_functions import*
+from various_functions import *
 
 
 def there_is_name(name,stationList):
@@ -20,7 +20,7 @@ def return_stations():
             if station[0]=="V":
                 station=station.split(";")
                 station[-1] = station[-1][:-1]
-                station_id=station[1]
+                station_id=int(station[1])
                 station_name=remove_accents(station[2])
                 if("bis" in station[3]):
                     station_line=int(station[3][0])*10
@@ -36,13 +36,14 @@ def return_stations():
                     vertex_list.append(stop)
         return vertex_list
 
+
 def return_edges():
     edges_list = []
     with open("Source/Sources projet métro/metro", "r") as edges:
         for segment in edges:
             if segment[0] == "E":
                 segment = segment.split(";")
-                segment_stations = (segment[1], segment[2])
+                segment_stations = (int(segment[1]), int(segment[2]))
                 segment_time = segment[3]
                 edge = Segment(segment_stations, segment_time)
                 edges_list.append(edge)
