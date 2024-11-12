@@ -36,4 +36,5 @@ class Segment:
 
     def get_time(self):
         return self.time
-
+    def __str__(self):
+        return f"Stations:{self.stations}\nTime:{self.time}"
