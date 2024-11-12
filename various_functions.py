@@ -9,3 +9,9 @@ def remove_accents(text):
     if "�?" in result:
         result = result.replace("�?",'E')
     return result
+
+def get_next_stations():
+    pass
+
+def get_station_by_vertex_nb(): # example 0002 or 0034
+    pass
