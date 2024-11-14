@@ -63,8 +63,8 @@ def return_adjacency_matrix():
     vertex = return_stations()  # Récupère la liste des stations
     segment = return_edges()  # Récupère la liste des segments
     stations = stations_list(vertex)  # Récupère la liste des stations sous une forme spécifique
-    adjacency_matrix = [[None for i in range(0, len(vertex))]] * len(vertex)
-    # Crée une matrice d'adjacence initiale avec des valeurs 'None'
+    adjacency_matrix = [[False]*len(vertex) for _ in range(len(vertex))]
+    # Crée une matrice d'adjacence initiale avec des valeurs 'False'
     for i in range(len(segment)):
         # Parcourt tous les segments
         depart = get_station_by_vertex_nb(vertex, segment[i].stations[0])  # Récupère la station de départ du segment
@@ -74,4 +74,6 @@ def return_adjacency_matrix():
         value = segment[i].time  # Récupère le temps de transit pour ce segment
         adjacency_matrix[index_depart][index_arrive] = value  # Remplie la matrice d'adjacence pour le départ -> arrivée
         adjacency_matrix[index_arrive][index_depart] = value  # Remplie la matrice d'adjacence pour l'arrivée -> départ
+        adjacency_matrix[index_depart][index_depart] = 0
+        adjacency_matrix[index_arrive][index_arrive] = 0
     return adjacency_matrix  # Retourne la matrice d'adjacence
