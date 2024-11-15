@@ -68,8 +68,3 @@ def stations_list(station_list):
     for station in station_list:
         st_list.append(station.identifier)  # Ajouter l'identifiant de chaque station à la liste
     return st_list  # Retourner la liste des identifiants des stations
-
-def get_edges(edges_list):
-    res = [None]*len(edges_list)
-    for edge in edges_list:
-        res.append((edge.stations[0], edge.stations[1]))
