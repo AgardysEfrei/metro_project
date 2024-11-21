@@ -6,4 +6,4 @@ import unicodedata as uni
 #listofstation = stations_list(stationslist)
 #Arbre = (Prim("1",[[False,3,2],[1,False,2],[1,9,2]],["1","2","3"]))
 #affichage_graphique(["1","2","3"],Arbre)
-print(return_positions())
+#affichage_graphique_all(return_stations(), return_edges(), return_positions(return_stations()))

@@ -58,12 +58,15 @@ def return_edges():
                 edges_list.append(edge)  # Ajoute le segment à la liste des arêtes
         return edges_list  # Retourne la liste des segments
 
-def return_positions():
+def return_positions(station_list):
     pos_list = {}
     with open("Source/Sources projet métro/pospoints.txt", "r") as pos:
         for coord in pos:
             coord = coord.split(";")
-            pos_list.update({remove_accents(coord[2].replace('\n', "")): [coord[0], coord[1]]})
+            station_name = remove_accents(coord[2].replace('\n', ""))
+            for station in station_list:
+                if station.identifier == station_name:
+                    pos_list.update({station.vertex[0][1]: (int(coord[0]), -int(coord[1]))})
     return pos_list
 
 def return_adjacency_matrix():
