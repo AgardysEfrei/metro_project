@@ -1,5 +1,7 @@
 import unicodedata as uni  # Importation du module unicodedata pour manipuler les caractères Unicode.
 import networkx as nx  # Importation du module NetworkX pour la manipulation de graphes.
+from matplotlib import pyplot as plt
+
 
 # Fonction pour supprimer les accents d'un texte
 def remove_accents(text):
@@ -68,3 +70,17 @@ def stations_list(station_list):
     for station in station_list:
         st_list.append(station.identifier)  # Ajouter l'identifiant de chaque station à la liste
     return st_list  # Retourner la liste des identifiants des stations
+
+def affichage_graphique(vertex_list,adjancy_matrix):
+    graph=nx.Graph()
+    edges_tuple=[]
+    for edge in range(len(adjancy_matrix)):
+        for sub_edge in range(len(adjancy_matrix[edge])):
+            if adjancy_matrix[edge][sub_edge] != False and adjancy_matrix[edge][sub_edge]!=0:
+                edges_tuple.append((vertex_list[edge],vertex_list[sub_edge]))
+    graph.add_nodes_from(vertex_list)
+    graph.add_edges_from(edges_tuple)
+    nx.draw(graph,nx.spring_layout(graph,k=0.8,scale=10),with_labels=True,node_color='lightblue')
+    plt.title("Graphique")
+    plt.figure(figsize=(50,50))
+    plt.show()

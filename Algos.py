@@ -1,5 +1,6 @@
 from Class import *
 from various_functions import*
+import copy
 from Parsing import*
 import sys
 
@@ -18,10 +19,10 @@ def get_edges(edges_list):
 def parcours_largeur():
     pass
 
-def connexite(matrix, vertex):
+def connexite(matrix):
     res = []
     p = []
-    p.append(vertex)
+    p.append(0)
     while(len(p) > 0):
         v = p.pop()
         if not v in res:
@@ -49,27 +50,37 @@ def Bellman_ford(vertices, edges, s):
 
     return (dist, pred) 
 
-
-def Prim(vertices):
-    key[0] = [sys.maxsize]*len(vertices)
-    parent = [None]*len(vertices)
-
-    key[0] = 0
-    mstSet = [False]*len(vertices)
-
-    for _ in range(len(vertices))
-
-matrix = return_adjacency_matrix()
-
-print(len(matrix))
-
-print(connexite(matrix, 0))
-
-vertices = return_stations()
-edges = get_edges(return_edges())
-
-res = Bellman_ford(vertices, edges, 0)
-
-print(Bellman_ford(vertices, edges, 0))
-
-print(res[0][251])
+'''
+def Prim(Starting_Vertex,Adjency_matrix,station_list):
+    adj_mat=copy.deepcopy(Adjency_matrix)
+    station_name = "1"#Starting_Vertex.identifier
+    previous_station=[]
+    new_tree = [[None] * len(station_list) for _ in range(len(station_list))]
+    station_index = station_list.index(station_name)
+    fin=1
+    while len(previous_station) != len(station_list):
+        value = None
+        for i in range(len(adj_mat[station_index])):
+            current_value = adj_mat[station_index][i]
+            if current_value != 0 and current_value != None:
+                print(current_value)
+                if value == None or value ==0 and i not in previous_station:
+                    value = current_value
+                    nouveau_noeud=i
+                if current_value < value and i not in previous_station:
+                    value = current_value
+                    nouveau_noeud=i
+        if value==None:
+            station_index = station_list[-fin]
+            fin+=1
+        else :
+            new_tree[station_index][nouveau_noeud] = value
+            previous_station.append(station_index)
+            station_index=nouveau_noeud
+            fin=1
+        reussi=False
+        print(previous_station)
+        if not reussi:
+            del previous_station[-1]
+    return new_tree
+'''

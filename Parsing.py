@@ -63,8 +63,8 @@ def return_adjacency_matrix():
     vertex = return_stations()  # Récupère la liste des stations
     segment = return_edges()  # Récupère la liste des segments
     stations = stations_list(vertex)  # Récupère la liste des stations sous une forme spécifique
-    adjacency_matrix = [[False]*len(vertex) for _ in range(len(vertex))]
-    # Crée une matrice d'adjacence initiale avec des valeurs 'False'
+    adjacency_matrix = [[None]*len(vertex) for _ in range(len(vertex))]
+    # Crée une matrice d'adjacence initiale avec des valeurs 'None'
     for i in range(len(segment)):
         # Parcourt tous les segments
         depart = get_station_by_vertex_nb(vertex, segment[i].stations[0])  # Récupère la station de départ du segment
