@@ -68,6 +68,7 @@ def return_positions(station_list):
                 if station.identifier == station_name:
                     pos_list.update({station.vertex[0][1]: (int(coord[0]), -int(coord[1]))})
     return pos_list
+
 def return_adjacency_matrix():
     # Fonction qui retourne la matrice d'adjacence des stations à partir des segments
     vertex = return_stations()  # Récupère la liste des stations

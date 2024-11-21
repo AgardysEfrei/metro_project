@@ -73,16 +73,36 @@ def stations_list(station_list):
         st_list.append(station.identifier)  # Ajouter l'identifiant de chaque station à la liste
     return st_list  # Retourner la liste des identifiants des stations
 
-def affichage_graphique(vertex_list,adjancy_matrix):
+def affichage_graphique_all(station_list,segment_list, position_list):
+    graph=nx.Graph()
+    labels = {}
+    edges_list = []
+    nodes_list = []
+    for station in station_list:
+        for next_station in get_next_stations(station_list, station, segment_list):
+            edges_list.append((station.vertex[0][1], next_station.vertex[0][1]))
+        nodes_list.append(station.vertex[0][1])
+        labels[station.vertex[0][1]] = station.identifier
+    nx.draw_networkx_nodes(graph, position_list, nodes_list, node_size=10)
+    nx.draw_networkx_edges(graph, position_list, edges_list, edge_color="blue")
+    nx.draw_networkx_labels(graph, position_list, labels, font_size=7)
+    plt.tight_layout()
+    plt.axis("off")
+    plt.show()
+
+
+def affichage_graphique(adjancy_matrix, vertex_list):
     graph=nx.Graph()
     edges_tuple=[]
     for edge in range(len(adjancy_matrix)):
         for sub_edge in range(len(adjancy_matrix[edge])):
             if adjancy_matrix[edge][sub_edge] != None and adjancy_matrix[edge][sub_edge]!=0:
                 edges_tuple.append((vertex_list[edge],vertex_list[sub_edge]))
+    
     graph.add_nodes_from(vertex_list)
     graph.add_edges_from(edges_tuple)
-    nx.draw(graph,nx.spring_layout(graph,k=0.8,scale=10),with_labels=True,node_color='lightblue')
+    pos = nx.spring_layout(graph,k=0.8,scale=10)
+    nx.draw(graph,pos,with_labels=True,node_color='lightblue')
     plt.title("Graphique")
     plt.figure(figsize=(50,50))
     plt.show()
