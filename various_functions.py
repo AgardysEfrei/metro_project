@@ -1,7 +1,9 @@
 import unicodedata as uni  # Importation du module unicodedata pour manipuler les caractères Unicode.
 import networkx as nx  # Importation du module NetworkX pour la manipulation de graphes.
 from matplotlib import pyplot as plt
-
+import Algos
+import Parsing
+from Class import *
 
 # Fonction pour supprimer les accents d'un texte
 def remove_accents(text):
@@ -76,7 +78,7 @@ def affichage_graphique(vertex_list,adjancy_matrix):
     edges_tuple=[]
     for edge in range(len(adjancy_matrix)):
         for sub_edge in range(len(adjancy_matrix[edge])):
-            if adjancy_matrix[edge][sub_edge] != False and adjancy_matrix[edge][sub_edge]!=0:
+            if adjancy_matrix[edge][sub_edge] != None and adjancy_matrix[edge][sub_edge]!=0:
                 edges_tuple.append((vertex_list[edge],vertex_list[sub_edge]))
     graph.add_nodes_from(vertex_list)
     graph.add_edges_from(edges_tuple)
@@ -84,3 +86,30 @@ def affichage_graphique(vertex_list,adjancy_matrix):
     plt.title("Graphique")
     plt.figure(figsize=(50,50))
     plt.show()
+def plus_court_chemin(depart,arrive,listofstation):
+    print("Vous etes a",depart)
+    station_arrive=arrive
+    chemin=[]
+    edges= Parsing.return_edges()
+    index_arrive=listofstation.index(arrive)
+    BellmanOutput=Algos.Bellman_ford(Parsing.return_stations(),Algos.get_edges(edges),listofstation.index(depart))
+    temps=BellmanOutput[0][listofstation.index(arrive)]
+    while(BellmanOutput[1][index_arrive]!=None):
+        chemin.append(arrive)
+        arrive=BellmanOutput[1][index_arrive]
+        index_arrive = arrive
+    del chemin[0]
+    Sta=Parsing.return_stations()
+    Ed=Parsing.return_edges()
+    ligne=Sta[listofstation.index(depart)].lines[0]
+    chemin=chemin[::-1]
+    for i in range(len(chemin)-1):
+        if ligne not in Sta[chemin[i+1]].lines:
+            next_sta=get_next_stations(Sta, Sta[chemin[i]],Ed)
+            for y in next_sta:
+                if y.identifier == Sta[chemin[i+1]].identifier:
+                        for z in y.lines:
+                            if z in Sta[chemin[i+1]].lines:
+                                ligne=z
+            print("A ",listofstation[chemin[i]],"changez et prenez la ligne",ligne)
+    print("Vous devriez arriver a",station_arrive,"dans environ",int(temps/60),"minutes")
