@@ -1,8 +1,8 @@
-from Parsing import*
-from Algos import*
+from Parsing import *
+from Algos import *
 import unicodedata as uni
-#adjency_matrix = return_adjacency_matrix()
-#stationslist = return_stations()
-#listofstation = stations_list(stationslist)
-#Arbre = (Prim("1",[[False,3,2],[1,False,2],[1,9,2]],["1","2","3"]))
-#affichage_graphique(["1","2","3"],Arbre)
+from various_functions import *
+adjency_matrix = return_adjacency_matrix()
+stationslist = return_stations()
+listofstation = stations_list(stationslist)
+plus_court_chemin(listofstation[4],"Villejuif, P. Vaillant Couturier",listofstation)
