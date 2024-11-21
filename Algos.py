@@ -15,9 +15,6 @@ def get_edges(edges_list):
         res.append([v,u,int(time)])
     return res
 
-def parcours_largeur():
-    pass
-
 def connexite(matrix):
     res = []
     p = []
