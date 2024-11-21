@@ -1,5 +1,5 @@
 from Class import *  # Importation des classes nécessaires
-from various_functions import *  # Importation des fonctions utilitaires
+from various_functions import remove_accents, stations_list, get_station_by_vertex_nb # Importation des fonctions utilitaires
 
 def there_is_name(name, stationList):
     # Vérifie si une station avec le nom spécifié existe déjà dans la liste 'stationList'
@@ -57,17 +57,6 @@ def return_edges():
                 edge = Segment(segment_stations, segment_time)  # Crée un objet Segment
                 edges_list.append(edge)  # Ajoute le segment à la liste des arêtes
         return edges_list  # Retourne la liste des segments
-
-def return_positions(station_list):
-    pos_list = {}
-    with open("Source/Sources projet métro/pospoints.txt", "r") as pos:
-        for coord in pos:
-            coord = coord.split(";")
-            station_name = remove_accents(coord[2].replace('\n', ""))
-            for station in station_list:
-                if station.identifier == station_name:
-                    pos_list.update({station.vertex[0][1]: (int(coord[0]), -int(coord[1]))})
-    return pos_list
 
 def return_adjacency_matrix():
     # Fonction qui retourne la matrice d'adjacence des stations à partir des segments

@@ -1,17 +1,15 @@
-from Class import *
-import various_functions
-import copy
-import Parsing
+from various_functions import get_next_stations, stations_list, get_station_by_vertex_nb
+from Parsing import return_stations, return_edges
 import sys
 
 
 def get_edges(edges_list):
-    vertices = Parsing.return_stations()
-    stations = various_functions.stations_list(vertices)
+    vertices = return_stations()
+    stations = stations_list(vertices)
     res = []
     for edge in edges_list:
-        u = stations.index(various_functions.get_station_by_vertex_nb(vertices, edge.stations[0]).identifier)
-        v = stations.index(various_functions.get_station_by_vertex_nb(vertices, edge.stations[1]).identifier)
+        u = stations.index(get_station_by_vertex_nb(vertices, edge.stations[0]).identifier)
+        v = stations.index(get_station_by_vertex_nb(vertices, edge.stations[1]).identifier)
         time = edge.time
         res.append([u,v,int(time)])
         res.append([v,u,int(time)])
@@ -37,7 +35,7 @@ def connexite(matrix):
 def Bellman_ford(vertices, edges, s):
     dist = [sys.maxsize]*len(vertices)
     pred = [None]*len(vertices)
-    stations = various_functions.stations_list(vertices)
+    stations = stations_list(vertices)
     dist[s] = 0
     
     for k in range(1, len(vertices) - 1):
@@ -78,3 +76,31 @@ def Prim(Starting_Vertex,Adjency_matrix,station_list):
         new_tree[station_depart][station_to_append] = value
         M.remove(station_to_append)
     return new_tree
+
+def plus_court_chemin(depart,arrive,listofstation):
+    print("Vous etes a",depart)
+    station_arrive=arrive
+    chemin=[]
+    edges= return_edges()
+    index_arrive=listofstation.index(arrive)
+    BellmanOutput=Bellman_ford(return_stations(),get_edges(edges),listofstation.index(depart))
+    temps=BellmanOutput[0][listofstation.index(arrive)]
+    while(BellmanOutput[1][index_arrive]!=None):
+        chemin.append(arrive)
+        arrive=BellmanOutput[1][index_arrive]
+        index_arrive = arrive
+    del chemin[0]
+    Sta=return_stations()
+    Ed=return_edges()
+    ligne=Sta[listofstation.index(depart)].lines[0]
+    chemin=chemin[::-1]
+    for i in range(len(chemin)-1):
+        if ligne not in Sta[chemin[i+1]].lines:
+            next_sta=get_next_stations(Sta, Sta[chemin[i]],Ed)
+            for y in next_sta:
+                if y.identifier == Sta[chemin[i+1]].identifier:
+                        for z in y.lines:
+                            if z in Sta[chemin[i+1]].lines:
+                                ligne=z
+            print("A ",listofstation[chemin[i]],"changez et prenez la ligne",ligne)
+    print("Vous devriez arriver a",station_arrive,"dans environ",int(temps/60),"minutes")

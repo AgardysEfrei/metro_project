@@ -1,6 +1,5 @@
 from Parsing import *
 from Algos import *
-import unicodedata as uni
 from various_functions import *
 adjency_matrix = return_adjacency_matrix()
 stationslist = return_stations()
